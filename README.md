@@ -4,7 +4,7 @@ Demo application which allows us to create posts, view posts, and also load the 
 
 ## Built with
 
--React
+- React
 
 ## Using
 
