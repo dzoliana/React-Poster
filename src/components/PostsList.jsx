@@ -1,27 +1,30 @@
-import { useState } from 'react';
+//9.)
+//import { useState, useEffect } from 'react';
+import { useLoaderData } from 'react-router-dom';
+
 import Post from './Post';
 import classes from './PostsList.module.css';
-import { useEffect } from 'react';
 
 function PostsList() {
+  const posts = useLoaderData();
   // 3.)
   // fetch('http://localhost:8080/posts').then(response=>response.json()).then(data=>{setPosts(data.posts)});
-  const [posts, setPosts] = useState([]);
-  const [isFetching, setIsFetching] = useState(false);
+  /*   const [posts, setPosts] = useState([]);
+  const [isFetching, setIsFetching] = useState(false); */
 
   // 4.)
-  useEffect(() => {
+  /* useEffect(() => {
     async function fetchPosts() {
       setIsFetching(true);
-      const response = await fetch('http://localhost:8080/posts');
-      const resData = await response.json();
+      //const response = await fetch('http://localhost:8080/posts');
+      //const resData = await response.json(); 
       setPosts(resData.posts);
       setIsFetching(false);
     }
     fetchPosts();
-  }, []);
+  }, []); */
 
-  function addPostHandler(postData) {
+  /* function addPostHandler(postData) {
     //2.)
     fetch('http://localhost:8080/posts', {
       method: 'POST',
@@ -29,28 +32,38 @@ function PostsList() {
       headers: { 'Content-Type': 'application/json' },
     });
     setPosts(existingPosts => [postData, ...existingPosts]);
-  }
+  } */
 
   return (
     <>
-      {!isFetching && posts.length > 0 && (
-        <ul className={classes.posts}>
-          {posts.map(post => (
-            <Post key={post.body} author={post.author} body={post.body} />
-          ))}
-        </ul>
-      )}
-      {!isFetching && posts.length === 0 && (
-        <div style={{ textAlign: 'center', color: 'white' }}>
-          <h2>There are no posts yet.</h2>
-          <p>Start adding some!</p>
-        </div>
-      )}
-      {isFetching && (
+      {
+        /* !isFetching && */ posts.length > 0 && (
+          <ul className={classes.posts}>
+            {posts.map(post => (
+              //19.)
+              <Post
+                key={post.id}
+                id={post.id}
+                author={post.author}
+                body={post.body}
+              />
+            ))}
+          </ul>
+        )
+      }
+      {
+        /* !isFetching && */ posts.length === 0 && (
+          <div style={{ textAlign: 'center', color: 'white' }}>
+            <h2>There are no posts yet.</h2>
+            <p>Start adding some!</p>
+          </div>
+        )
+      }
+      {/* {isFetching && (
         <div style={{ textAlign: 'center', color: 'white' }}>
           <p>Loading posts...</p>
         </div>
-      )}
+      )} */}
     </>
   );
 }
@@ -73,3 +86,7 @@ export default PostsList;
 //Kreirali smo novu async fju jer useEfect uzima fju koja nebi trebala vratiti promise itself, već bi trebala vratiti ništa ili cleanup fju te se zato ova async fja odma i poziva.
 // Sada će react sam odlučiti kada će se ova fja izvršiti. To će se kontrolirati sa drugim argumentom koji je prosljeđen u 'useEffect', niz. Ovaj niz na kraju specificira ovisnosti vaše funkcije. A ovisnost je jednostavno bilo koja varijabla ili funkcija koja se može definirati izvan ove effect funkcije  bilo gdje u vašim React komponentama, u ovoj komponenti ili nekoj nadređenoj komponenti koja se prenosi kroz props. I kad god se takva varijabla ili funkcija definirana izvan funkcije efekta promijeni, primi novu vrijednost. Sada, ako imamo prazan niz, to jednostavno znači da ova funkcija nema ovisnosti i stoga se više nikada neće izvršiti.
 //Umjesto toga, React će ga izvršiti samo jednom i tada se ova komponenta prvi put renderira. I tehnički, izvršava se nakon što se komponenta prvi put renderira, tako da teoretski, komponenta se prvo renderira bez ikakvih objava, a zatim odmah izvršava ovu funkciju effect gdje se objave ažuriraju. Ali to je sve tako brzo da ovdje vidimo samo konačno stanje u kojem se objave fetch-aju.
+
+//9.) Možemo ići na postsList i tu sada možemo importati i hook 'useLoaderData' iz react-router-doma. Sada se ova hook može pozvati unutar funkcije komponente PostsList. Kao i sve hooks, mora se koristiti samo unutar funkcija komponente i to nam daje podatke koje vraća loader (iz Posts.jsx) koji je dodijeljen ruti koja je ruta koja je aktivna kada se renderira komponenta postsList. Dakle, na kraju dobivam svoje postove jer u loader-u returnam postove ('return resData.posts;'). Rješimo se posts i fetching napisanih preko 'useState', te 'useEffect' jer ga ne koristimo više za fetching.
+
+//19.) Dakle, na 'PostList' gdje renderiram svoje postove sada također postavljam ID prop i postavljam ga na ' id={post.id}' jer moji postovi sada imaju ID-ove budući da dolaze iz backend i tamo se dodaje ID.  Postavljamo ID prop na 'Post' tako da se tamo može koristiti za Link.
