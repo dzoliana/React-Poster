@@ -21,7 +21,3 @@ Demo application which allows us to create posts, view posts, and also load the 
 - data fetching via `loader()`
 - submitting data with `action()`
 - dynamic routes
-
-## Project Link
-
-- [posts-app](https://posts-anadz.netlify.app/ 'posts')
