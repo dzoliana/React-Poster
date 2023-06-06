@@ -25,11 +25,14 @@ Demo application which allows us to create posts, view posts, and also load the 
 ## Getting started
 
 This project was bootstrapped with Vite.
+Before running project you need to download dummy-beckend repository.
 
 First Vite project with NPM:
-`$ npm create vite@latest
-  cd my-project
-  npm install`
+
+```$ npm create vite@latest
+ $ cd my-project
+ $ npm install
+```
 
 Run `npm run dev` to spin up the dev server port 8080.
 Make required changes to suit your needs.
