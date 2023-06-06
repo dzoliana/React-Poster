@@ -31,8 +31,8 @@ First Vite project with NPM:
 
 ```
 $ npm create vite@latest
- $ cd my-project
- $ npm install
+$ cd my-project
+$ npm install
 ```
 
 Run `npm run dev` to spin up the dev server port 8080.
