@@ -21,3 +21,19 @@ Demo application which allows us to create posts, view posts, and also load the 
 - data fetching via `loader()`
 - submitting data with `action()`
 - dynamic routes
+
+## Getting started
+
+This project was bootstrapped with Vite.
+
+First Vite project with NPM:
+`$ npm create vite@latest
+  cd my-project
+  npm install`
+
+Run `npm run dev` to spin up the dev server port 8080.
+Make required changes to suit your needs.
+
+## Project Link
+
+- [posts](https://posts-anadz.netlify.app/)

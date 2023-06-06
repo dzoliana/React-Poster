@@ -3,3 +3,4 @@ public
 src/assets
 .prettierrc
 dist
+dummy-backend
