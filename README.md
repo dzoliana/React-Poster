@@ -29,7 +29,8 @@ Before running project you need to download dummy-beckend repository.
 
 First Vite project with NPM:
 
-```$ npm create vite@latest
+```
+$ npm create vite@latest
  $ cd my-project
  $ npm install
 ```
